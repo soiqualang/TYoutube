@@ -9,6 +9,8 @@ https://dothanhlong.org/huong-dan-docker-toan-tap/
 
 https://colab.research.google.com/drive/1E4B0xMXFpcX13gpPTx4scNP_hRulNxPG
 
+https://github.com/quangvublog/Docker/blob/master/Dockerfile
+
 Trong này mình vẫn còn vướng mắc:
 
 * Làm sao để ghi file ra ngoài môi trường Docker (khi download video, mp3)
