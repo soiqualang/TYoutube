@@ -25,6 +25,8 @@ virtualenv tyoutube_env
 pip install autosub
 pip install pytube
 pip install youtube_dl
+
+pip freeze > requirements.txt
 ```
 
 # Preferences
@@ -32,3 +34,5 @@ pip install youtube_dl
 https://viblo.asia/p/docker-run-vs-cmd-vs-entrypoint-Az45boVgKxY
 
 https://blog.cloud365.vn/container/tim-hieu-docker-phan-4/
+
+https://stackoverflow.com/questions/48561981/activate-python-virtualenv-in-dockerfile
