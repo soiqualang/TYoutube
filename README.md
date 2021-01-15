@@ -66,15 +66,18 @@ docker stop tyoutube
 # Start container
 docker start tyoutube
 
+# Run tool
 # cli to container
 docker exec -it tyoutube /bin/sh
 
-# Thoát cli
-`exit`
-
-# Run tool
 python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
 python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
+
+# Thoát cli
+exit
+
+
+docker exec -it tyoutube python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
 
 # Remove container
 docker rm tyoutube
