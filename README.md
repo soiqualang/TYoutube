@@ -57,7 +57,8 @@ docker build -t tyoutube:1.0 .
 
 ```bash
 # Tạo và start container
-docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data c7f0c536649c
+docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data tyoutube:1.0
+docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data soiqualang/tyoutube:1.0
 
 # Stop container
 docker stop tyoutube
@@ -82,6 +83,13 @@ python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch
 docker rm tyoutube
 ```
 
+### Push to Dockerhub
+
+```bash
+docker login -u soiqualang
+docker tag tyoutube:1.0 soiqualang/tyoutube:1.0
+docker push soiqualang/tyoutube:1.0
+```
 
 # Preferences
 
