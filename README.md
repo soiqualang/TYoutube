@@ -67,9 +67,6 @@ docker stop tyoutube
 docker start tyoutube
 
 # cli to container
-# Linux
-docker exec -it tyoutube /bin/bash
-# Window
 docker exec -it tyoutube /bin/sh
 
 # Thoát cli
