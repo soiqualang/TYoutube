@@ -46,11 +46,33 @@ python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch
 python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
 ```
 
-### Build Docker
+### Build Docker ra image
 
 ```bash
 # Tên docker không được viết hoa
 docker build -t tyoutube:1.0 .
+```
+
+### Run Docker
+
+```bash
+# Tạo và start container
+docker run -it -v D:/sync/websvr/docker/tmp:/data c7f0c536649c
+
+# Stop container
+docker stop 4110d0e401c0
+
+# Start container
+docker start 4110d0e401c0
+
+# cli to container
+# Linux
+docker exec -it 4110d0e401c0 /bin/bash
+# Window
+docker exec -it 4110d0e401c0 /bin/sh
+
+# Run tool
+python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
 ```
 
 # Preferences
