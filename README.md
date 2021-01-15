@@ -31,6 +31,28 @@ pip install youtube_dl
 pip freeze > requirements.txt
 ```
 
+### Build tool
+
+```bash
+# List video
+python tyb.py -download_mode "list" -youtube_url "PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
+# hoặc
+python tyb.py -download_mode "list" -youtube_url "https://www.youtube.com/playlist?list=PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
+
+# a video
+python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
+
+# a mp3
+python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
+```
+
+### Build Docker
+
+```bash
+# Tên docker không được viết hoa
+docker build -t tyoutube:1.0 .
+```
+
 # Preferences
 
 https://viblo.asia/p/docker-run-vs-cmd-vs-entrypoint-Az45boVgKxY
