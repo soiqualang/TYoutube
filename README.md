@@ -57,23 +57,31 @@ docker build -t tyoutube:1.0 .
 
 ```bash
 # Tạo và start container
-docker run -it -v D:/sync/websvr/docker/tmp:/data c7f0c536649c
+docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data c7f0c536649c
 
 # Stop container
-docker stop 4110d0e401c0
+docker stop tyoutube
 
 # Start container
-docker start 4110d0e401c0
+docker start tyoutube
 
 # cli to container
 # Linux
-docker exec -it 4110d0e401c0 /bin/bash
+docker exec -it tyoutube /bin/bash
 # Window
-docker exec -it 4110d0e401c0 /bin/sh
+docker exec -it tyoutube /bin/sh
+
+# Thoát cli
+`exit`
 
 # Run tool
 python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
+python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
+
+# Remove container
+docker rm tyoutube
 ```
+
 
 # Preferences
 
