@@ -1,6 +1,10 @@
 # T-Youtube
 A tools to download video, mp3, transcripts from Youtube
 
+> Docker hub
+
+https://hub.docker.com/r/soiqualang/tyoutube
+
 > Repo này để mình thực hành tạo `Docker`, mình sẽ chuyển cái tool python của mình sang docker để ai cũng có thể chạy được mà ko cần cài đặt các python packages ^^
 
 
