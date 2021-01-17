@@ -3,19 +3,6 @@ A tools to download video, mp3, transcripts from Youtube
 
 > Repo này để mình thực hành tạo `Docker`, mình sẽ chuyển cái tool python của mình sang docker để ai cũng có thể chạy được mà ko cần cài đặt các python packages ^^
 
-Hướng dẫn về Docker
-
-https://dothanhlong.org/huong-dan-docker-toan-tap/
-
-https://colab.research.google.com/drive/1E4B0xMXFpcX13gpPTx4scNP_hRulNxPG
-
-https://github.com/quangvublog/Docker/blob/master/Dockerfile
-
-Trong này mình vẫn còn vướng mắc:
-
-* Làm sao để ghi file ra ngoài môi trường Docker (khi download video, mp3)
-* Gọi lệnh vô môi trường Docker để chạy tool
-* Có cần tạo `virtualenv` để cài các packages không, nếu có thì có dùng lại `virtualenv` ở local được không?
 
 ## Setup Local
 
@@ -31,34 +18,52 @@ pip install youtube_dl
 pip freeze > requirements.txt
 ```
 
-### Build tool
+### Run tool
+
+> Active Virtual Env
 
 ```bash
-# List video
+# Window
+tyoutube_env/Scripts/activate
+
+# Linux
+source tyoutube_env/bin/activate
+```
+
+> Run tool
+
+* `download_mode`: What you want to download
+  * `video`: A video file
+  * `mp3`: A mp3 file
+  * `list`: List video in youtube playlist
+* `youtube_url`: Youtube video or Playlist link
+* `download_path`: Path to save video, mp3,..
+
+```bash
+# Download all video in a playlist
 python tyb.py -download_mode "list" -youtube_url "PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
-# hoặc
+# or
 python tyb.py -download_mode "list" -youtube_url "https://www.youtube.com/playlist?list=PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
 
-# a video
+# Download a video
 python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
 
-# a mp3
+# Download a mp3
 python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
 ```
 
-### Build Docker ra image
+## Use Docker
+
+### Pull and start container
+
+* `<your_local_download_dir>`: Your local dir that you want to save your video, mp3,..
+* `<docker_download_dir>`: Download dir in docker
+
+Ex: `docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data soiqualang/tyoutube:1.0`
 
 ```bash
-# Tên docker không được viết hoa
-docker build -t tyoutube:1.0 .
-```
-
-### Run Docker
-
-```bash
-# Tạo và start container
-docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data tyoutube:1.0
-docker run -it -d --name tyoutube -v D:/sync/websvr/docker/tmp:/data soiqualang/tyoutube:1.0
+# Pull and start container
+docker run -it -d --name tyoutube -v <your_local_download_dir>:/<docker_download_dir> soiqualang/tyoutube:1.0
 
 # Stop container
 docker stop tyoutube
@@ -66,30 +71,32 @@ docker stop tyoutube
 # Start container
 docker start tyoutube
 
-# Run tool
-# cli to container
-docker exec -it tyoutube /bin/sh
-
-python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
-python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
-
-# Thoát cli
-exit
-
-
-docker exec -it tyoutube python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
-
 # Remove container
 docker rm tyoutube
 ```
 
-### Push to Dockerhub
+### Run tool
+
+* `download_mode`: What you want to download
+  * `video`: A video file
+  * `mp3`: A mp3 file
+  * `list`: List video in youtube playlist
+* `youtube_url`: Youtube video or Playlist link
+* `download_path`: Path to save video, mp3,..
 
 ```bash
-docker login -u soiqualang
-docker tag tyoutube:1.0 soiqualang/tyoutube:1.0
-docker push soiqualang/tyoutube:1.0
+# Download a file mp3
+docker exec -it tyoutube python tyb.py -download_mode "mp3" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "/data/keochanh_mp3"
+
+# Download a video
+docker exec -it tyoutube python tyb.py -download_mode "video" -youtube_url "https://www.youtube.com/watch?v=tNfGBssfCmE" -download_path "keochanh_mp3"
+
+# Download all video in a playlist
+python tyb.py -download_mode "list" -youtube_url "PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
+# or
+python tyb.py -download_mode "list" -youtube_url "https://www.youtube.com/playlist?list=PLhPvsstp6O2QTcrY20ysXRbyRo30am87X" -download_path "keochanh_mp3"
 ```
+
 
 # Preferences
 
