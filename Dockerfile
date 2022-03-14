@@ -4,3 +4,4 @@ RUN apk add  --no-cache ffmpeg
 COPY requirements.txt .
 COPY tyb.py .
 RUN pip install -r requirements.txt
+RUN pip install -U youtube-dl
